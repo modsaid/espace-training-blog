@@ -1,19 +1,51 @@
-<p id="notice"><%= notice %></p>
+<script type="text/javascript">
+	function add_comment()
+	{
+		$(document).ready(function() {
+			$.ajax({
+				type : "POST",
+				url : "/comments",
+				data: {
+					authenticity_token: "<%= form_authenticity_token %>",
+					comment: {body: $("#new_comment_textarea").val(),
+					          blog_id: <%= @blog.id %>}
+				},
+				success : function(responseHTML) {
+					$("#blog_comments").append(responseHTML)
+					$("#new_comment_textarea").val("");
+				}
+			});
+		});
+	}
+</script>
 
 <p>
-  <strong>Title:</strong>
-  <%= @blog.title %>
+	<strong>Title:</strong>
+	<%= @blog.title %>
 </p>
 
 <p>
-  <strong>Body:</strong>
-  <%= @blog.body %>
+	<strong>Body:</strong>
+	<%= @blog.body %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @blog.user_id %>
+	<strong>User:</strong>
+	<%= @blog.user.name %>
 </p>
 
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<%= link_to 'Edit', edit_blog_path(@blog) %> | <%= link_to 'Back', blogs_path %>
+
+<h2>Comments</h2>
+
+<div id="blog_comments">
+	<% @comments.each do |comment| %>
+		<%= render partial: '/comments/comment', locals: {comment: comment} %>
+	<% end %>
+</div>
+
+<textarea id="new_comment_textarea"></textarea>
+<br />
+<button type="button" class="btn btn-default" onclick="add_comment()">
+	Add Comment
+</button>
