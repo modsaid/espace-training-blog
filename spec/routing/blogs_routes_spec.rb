@@ -16,32 +16,32 @@ describe 'routes for Blogs', type: :routing do
   end
 
   describe 'member routes' do
-    before(:each) do
-      @blog = FactoryGirl.create(:blog)
+    let :blog do
+      FactoryGirl.create(:blog)
     end
 
     it 'routes GET /blogs/:id to blogs#show' do
-      expect(get("/blogs/#{@blog.id}")).to route_to(controller: 'blogs',
+      expect(get("/blogs/#{blog.id}")).to route_to(controller: 'blogs',
                                                     action:     'show',
-                                                    id:         "#{@blog.id}")
+                                                    id:         "#{blog.id}")
     end
 
     it 'routes GET /blogs/:id/edit to blogs#edit' do
-      expect(get("/blogs/#{@blog.id}/edit")).to route_to(controller: 'blogs',
+      expect(get("/blogs/#{blog.id}/edit")).to route_to(controller: 'blogs',
                                                          action:     'edit',
-                                                         id:         "#{@blog.id}")
+                                                         id:         "#{blog.id}")
     end
 
     it 'routes PUT /blogs/:id to blogs#update' do
-      expect(put("/blogs/#{@blog.id}")).to route_to(controller: 'blogs',
+      expect(put("/blogs/#{blog.id}")).to route_to(controller: 'blogs',
                                                     action:     'update',
-                                                    id:         "#{@blog.id}")
+                                                    id:         "#{blog.id}")
     end
 
     it 'routes DELETE /blogs/:id to blogs#destroy' do
-      expect(delete("/blogs/#{@blog.id}")).to route_to(controller: 'blogs',
+      expect(delete("/blogs/#{blog.id}")).to route_to(controller: 'blogs',
                                                        action:     'destroy',
-                                                       id:         "#{@blog.id}")
+                                                       id:         "#{blog.id}")
     end
   end
 end
