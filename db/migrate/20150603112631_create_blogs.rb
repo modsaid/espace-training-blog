@@ -1,11 +1,11 @@
 class CreateBlogs < ActiveRecord::Migration
-	def change
-		create_table :blogs do |t|
-			t.string :title
-			t.text :body
-			t.integer :user_id
+  def change
+    create_table :blogs do |t|
+      t.string :title
+      t.text :body
+      t.integer :user_id
 
-			t.timestamps null: false
-		end
-	end
+      t.timestamps null: false
+    end
+  end
 end

@@ -1,22 +1,24 @@
 <script type="text/javascript">
-	function add_comment()
-	{
-		$(document).ready(function() {
-			$.ajax({
-				type : "POST",
-				url : "/comments",
-				data: {
-					authenticity_token: "<%= form_authenticity_token %>",
-					comment: {body: $("#new_comment_textarea").val(),
-					          blog_id: <%= @blog.id %>}
-				},
-				success : function(responseHTML) {
-					$("#blog_comments").append(responseHTML)
-					$("#new_comment_textarea").val("");
-				}
-			});
-		});
-	}
+    function add_comment()
+    {
+        $(document).ready(function() {
+            $.ajax({
+                type : "POST",
+                url : "/comments",
+                data: {
+                    authenticity_token: "<%= form_authenticity_token %>",
+                    comment: {
+                        body: $("#new_comment_textarea").val(),
+                        blog_id: <%= @blog.id %>
+                    }
+                },
+                success : function(responseHTML) {
+                    $("#blog_comments").append(responseHTML)
+                    $("#new_comment_textarea").val("");
+                }
+            });
+        });
+    }
 </script>
 
 <p>
