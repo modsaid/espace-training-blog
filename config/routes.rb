@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :blogs
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :comments, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
