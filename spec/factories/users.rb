@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :user do |f|
     f.name                  Faker::Name.name
     f.email                 Faker::Internet.email
-    f.password              '123456789'
-    f.password_confirmation '123456789'
+    f.password              ENV['testing_password']
+    f.password_confirmation ENV['testing_password']
   end
 end
