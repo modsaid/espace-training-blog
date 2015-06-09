@@ -45,6 +45,50 @@ describe BlogsController do
         expect(response).to render_template :new
       end
     end
+
+    describe 'PUT #update' do
+      context 'with valid attributes' do
+        it 'edits the blog' do
+          editing_blog_attributes = FactoryGirl.attributes_for(:blog)
+
+          put :update, blog: editing_blog_attributes, id: @blog.id
+
+          expect(@blog.title).to eq editing_blog_attributes[:title]
+        end
+
+        it 'redirects to the blog after editing' do
+          post :update, blog: FactoryGirl.attributes_for(:blog), id: @blog.id
+
+          expect(response).to redirect_to @blog
+        end
+      end
+
+      context 'with invalid attributes' do
+        it 'does not save the edits to the blog' do
+          expect{ post :update, blog: FactoryGirl.attributes_for(:blog, title: nil), id: @blog.id }.to_not change(@blog, :title)
+        end
+
+        it 're-renders edit blog template' do
+          post :update, blog: FactoryGirl.attributes_for(:blog, title: nil), id: @blog.id
+
+          expect(response).to render_template :edit
+        end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'deletes the blog' do
+        delete :destroy, id: @blog.id
+
+        expect(Blog.count).to eq 0
+      end
+
+      it 'redirects to blogs index' do
+          delete :destroy, id: @blog.id
+
+          expect(response).to redirect_to blogs_path
+        end
+    end
   end
 
   context 'creating blog' do
