@@ -1,16 +1,15 @@
 require 'spec_helper'
 require 'capybara/rspec'
 
-describe 'Blog', type: :feature do
-  before(:each) do
-    @user = FactoryGirl.build(:user)
-    @user.skip_confirmation!
-    @user.save!
+describe 'Blog Features', type: :feature do
 
-    login_with @user.email, TESTING_PASSWORD
-  end
+  context 'with no exisiting blog' do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
 
-  describe 'with no exisiting blog' do
+      login_with @user.email, TESTING_PASSWORD
+    end
+
     it 'created successfully' do
       visit blogs_path
 
@@ -27,6 +26,8 @@ describe 'Blog', type: :feature do
   describe 'with exisiting blog' do
     before(:each) do
       @blog = FactoryGirl.create(:blog)
+
+      login_with @blog.user.email, TESTING_PASSWORD
     end
 
     it "edited successfully" do
@@ -34,7 +35,7 @@ describe 'Blog', type: :feature do
 
       click_link 'Edit'
 
-      fill_blog_form_with('Edited Title', 'Edited Content', @user)
+      fill_blog_form_with('Edited Title', 'Edited Content', @blog.user)
 
       click_button 'Update Blog'
 

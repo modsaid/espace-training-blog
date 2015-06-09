@@ -6,9 +6,8 @@ describe User do
   end
 
   it 'is vaild user' do
-    user = FactoryGirl.build(:user)
-    user.skip_confirmation!
-    user.save!
+    user = FactoryGirl.create(:user)
+
     expect(user).to be_valid
   end
 end

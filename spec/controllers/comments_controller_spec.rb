@@ -4,13 +4,9 @@ describe CommentsController do
   include Devise::TestHelpers
 
   before(:each) do
-    user = FactoryGirl.build(:user)
-    user.skip_confirmation!
-    user.save!
-
-    sign_in user
-
     @blog = FactoryGirl.create(:blog)
+
+    sign_in @blog.user
   end
 
   describe 'POST #create' do

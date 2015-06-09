@@ -3,13 +3,9 @@ require 'capybara/rspec'
 
 describe 'Adding Comment', type: :feature do
   before(:each) do
-    @user = FactoryGirl.build(:user)
-    @user.skip_confirmation!
-    @user.save!
+    @blog = FactoryGirl.create(:blog)
 
-    login_with @user.email, TESTING_PASSWORD
-
-    @blog = FactoryGirl.create(:blog, user_id: @user.id)
+    login_with @blog.user.email, TESTING_PASSWORD
   end
 
   it 'add comment successfully' do

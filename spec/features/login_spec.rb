@@ -3,9 +3,7 @@ require 'capybara/rspec'
 
 describe 'Log in', type: :feature do
   it 'with exisiting user' do
-    user = FactoryGirl.build(:user)
-    user.skip_confirmation!
-    user.save!
+    user = FactoryGirl.create(:user)
 
     login_with user.email, TESTING_PASSWORD
 

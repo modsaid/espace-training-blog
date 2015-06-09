@@ -6,5 +6,9 @@ FactoryGirl.define do
     f.email                 Faker::Internet.email
     f.password              TESTING_PASSWORD
     f.password_confirmation TESTING_PASSWORD
+
+    before(:create) do |user|
+      user.skip_confirmation!
+    end
   end
 end
