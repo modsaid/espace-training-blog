@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, if: :require_user
 
   def require_user
-    params[:controller] != 'devise/registrations'
+    params[:controller] != 'users/registrations'
   end
 end
