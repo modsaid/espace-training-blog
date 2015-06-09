@@ -51,4 +51,6 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true
   }
+
+  TESTING_PASSWORD = '123456789'
 end

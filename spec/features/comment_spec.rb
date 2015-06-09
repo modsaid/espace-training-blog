@@ -7,7 +7,7 @@ describe 'Adding Comment', type: :feature do
     @user.skip_confirmation!
     @user.save!
 
-    login_with @user.email, ENV['testing_password']
+    login_with @user.email, TESTING_PASSWORD
 
     @blog = FactoryGirl.create(:blog, user_id: @user.id)
   end

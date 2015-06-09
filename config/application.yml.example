@@ -1,0 +1,6 @@
+development:
+  gmail_username: type gmail account
+  gmail_password: type gmail password
+test:
+  gmail_username: type gmail account
+  gmail_password: type gmail password
