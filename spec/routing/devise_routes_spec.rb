@@ -16,12 +16,12 @@ describe 'devise routes', type: :routing do
   end
 
   describe 'users routes' do
-    it 'routes GET /users/sign_up to devise/registrations#new' do
-      expect(get('/users/sign_up')).to route_to('devise/registrations#new')
+    it 'routes GET /users/sign_up to users/registrations#new' do
+      expect(get('/users/sign_up')).to route_to('users/registrations#new')
     end
 
-    it 'routes POST /users to devise/registrations#create' do
-      expect(post('/users')).to route_to('devise/registrations#create')
+    it 'routes POST /users to users/registrations#create' do
+      expect(post('/users')).to route_to('users/registrations#create')
     end
   end
 end
