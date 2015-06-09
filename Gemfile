@@ -56,4 +56,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
