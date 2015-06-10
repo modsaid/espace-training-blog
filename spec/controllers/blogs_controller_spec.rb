@@ -92,8 +92,10 @@ describe BlogsController do
   end
 
   context 'creating blog' do
-     before(:each) do
-      user = FactoryGirl.create(:user)
+    let(:user){FactoryGirl.create(:user)}
+
+    before(:each) do
+      # user = FactoryGirl.create(:user)
 
       sign_in user
     end
@@ -102,6 +104,12 @@ describe BlogsController do
       context 'with valid attributes' do
         it 'creates a new blog' do
           expect{ post :create, blog: FactoryGirl.attributes_for(:blog) }.to change(Blog, :count).by(1)
+        end
+
+        it 'should prevent creating blog associated with other users' do 
+          fake_user_id = user.id + 10
+          attributes = FactoryGirl.attributes_for(:blog).merge(user_id: fake_user_id)
+          expect{ post :create, blog: attributes }.to change(user.blogs, :count).by(1)
         end
 
         it 'redirects to the new blog' do
